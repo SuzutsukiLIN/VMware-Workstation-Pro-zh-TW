@@ -1,0 +1,22 @@
+name: Source-only validation
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ensure no VMware proprietary payload was committed
+        run: |
+          test ! -f payload/es/vmappsdk-es.dll
+          test ! -f payload/es/vmui-es.dll
+          test ! -f payload/es/vmware.vmsg
+          if git ls-files | grep -Ei '\.(dll|vmsg)$'; then exit 1; fi
+      - name: Test source and packaging rules
+        run: |
+          python -m compileall -q builder
+          python -m unittest discover -s tests -v
