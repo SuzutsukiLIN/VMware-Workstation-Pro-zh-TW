@@ -1,6 +1,7 @@
 /payload/es/*
 !/payload/es/.gitkeep
 *.zip
+!/downloads/VMware_Workstation_26.0.1_zhTW_v1.2_OneClick.zip
 *.exe
 __pycache__/
 *.pyc
