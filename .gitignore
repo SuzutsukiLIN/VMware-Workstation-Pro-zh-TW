@@ -1,0 +1,7 @@
+/payload/es/*
+!/payload/es/.gitkeep
+*.zip
+*.exe
+__pycache__/
+*.pyc
+.DS_Store
